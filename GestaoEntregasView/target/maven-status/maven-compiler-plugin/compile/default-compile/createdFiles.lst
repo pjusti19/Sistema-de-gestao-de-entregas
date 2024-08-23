@@ -1,0 +1,10 @@
+br\cefetmg\gestaoentregasview\FXMLCadastroClienteController.class
+br\cefetmg\gestaoentregasview\LoginController.class
+br\cefetmg\gestaoentregasview\FXMLCadastroProdutoController.class
+br\cefetmg\gestaoentregasview\MainController.class
+br\cefetmg\gestaoentregasview\FXMLCadastroEmpresaController.class
+module-info.class
+br\cefetmg\gestaoentregasview\helper\VerificadorDeCampos.class
+br\cefetmg\gestaoentregasview\App.class
+br\cefetmg\gestaoentregasview\FXMLCadastroFuncionarioController.class
+br\cefetmg\gestaoentregasview\FXMLCadastroPedidoController.class
