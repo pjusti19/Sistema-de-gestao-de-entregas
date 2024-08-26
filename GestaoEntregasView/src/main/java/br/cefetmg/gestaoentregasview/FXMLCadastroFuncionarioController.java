@@ -14,6 +14,10 @@ import javafx.scene.control.*;
 import br.cefetmg.GestaoEntregasController.FuncionarioController;
 import br.cefetmg.GestaoEntregasEntidades.Funcionario;
 import java.util.Map;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -32,6 +36,9 @@ public class FXMLCadastroFuncionarioController implements Initializable {
 
     @FXML
     private Button cadastrarFuncionario;
+    
+    @FXML
+    private Button voltarButton;
 
     @FXML
     private ComboBox<String> comboBoxOcupacaoFuncionario;
@@ -76,6 +83,19 @@ public class FXMLCadastroFuncionarioController implements Initializable {
             alert.setContentText("Error: " + ex.getMessage());
         }
         alert.show(); 
+    }
+    public void voltarMain() {
+        try {
+            Stage stage = (Stage) voltarButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = loader.load();
+            String perfil = UserSession.getPerfil();
+            UserSession.setPerfil(perfil);
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela principal.");
+        }
     }
     
     @Override

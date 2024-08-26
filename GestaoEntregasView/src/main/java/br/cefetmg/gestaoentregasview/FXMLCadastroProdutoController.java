@@ -54,6 +54,19 @@ public class FXMLCadastroProdutoController {
         }
         alert.show();
     }
+    public void voltarMain() {
+        try {
+            Stage stage = (Stage) voltarButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = loader.load();
+            String perfil = UserSession.getPerfil();
+            UserSession.setPerfil(perfil);
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela principal.");
+        }
+    }
 
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);

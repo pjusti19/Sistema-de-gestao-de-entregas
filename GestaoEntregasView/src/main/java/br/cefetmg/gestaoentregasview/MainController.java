@@ -17,8 +17,16 @@ public class MainController {
 
     @FXML
     private VBox opcoes;
-
+    
+    private String perfil;
+    
+    public void initialize() {
+        String perfil = UserSession.getPerfil();
+        setPerfil(perfil);
+    }
+    
     public void setPerfil(String perfil) {
+        perfil = UserSession.getPerfil();
         saudacoes.setText("Bem-vindo, " + perfil + "!");
         opcoes.getChildren().clear();
 
@@ -31,6 +39,10 @@ public class MainController {
         } else if ("Entregador".equals(perfil)) {
             addButton("Ver Pedidos", "verPedidos");
         }
+    }
+    
+    public String getPerfil(){
+        return perfil;
     }
 
     private void addButton(String text, String action) {

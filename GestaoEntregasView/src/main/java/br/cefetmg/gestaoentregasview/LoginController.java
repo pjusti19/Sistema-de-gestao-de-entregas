@@ -20,8 +20,10 @@ public class LoginController {
         
         try {
             if ("admin".equals(password)) {
+                UserSession.setPerfil("Administrador");
                 loadMainScene("Administrador");
             } else if ("entregador".equals(password)) {
+                UserSession.setPerfil("Entregador");
                 loadMainScene("Entregador");
             } else {
                 showAlert(AlertType.ERROR, "Erro", "Senha inválida.");
@@ -32,7 +34,7 @@ public class LoginController {
         }
     }
 
-    private void loadMainScene(String perfil) throws Exception {
+    public void loadMainScene(String perfil) throws Exception {
         Stage stage = (Stage) passwordField.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         Parent root = loader.load();

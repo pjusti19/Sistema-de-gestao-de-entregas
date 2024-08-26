@@ -8,6 +8,10 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class FXMLCadastroEmpresaController {
 
@@ -25,7 +29,10 @@ public class FXMLCadastroEmpresaController {
 
     @FXML
     private Button cadastrarEmpresa;
-
+    
+    @FXML
+    private Button voltarButton;
+    
     @FXML
     public void cadastrarEmpresa() {
         
@@ -71,5 +78,23 @@ public class FXMLCadastroEmpresaController {
         }
         alert.show();
     }
-
+    public void voltarMain() {
+        try {
+            Stage stage = (Stage) voltarButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = loader.load();
+            String perfil = UserSession.getPerfil();
+            UserSession.setPerfil(perfil);
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela principal.");
+        }
+    }
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

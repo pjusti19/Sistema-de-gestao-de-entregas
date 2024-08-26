@@ -48,7 +48,14 @@ public class FXMLCadastroPedidoController implements Initializable {
 
     @FXML
     private Button voltarButton;
+    
+    private MainController mainController;
 
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    
     @FXML
     public void cadastrarPedido() {
         String produto = textFieldProduto.getText();
@@ -102,6 +109,19 @@ public class FXMLCadastroPedidoController implements Initializable {
         }
         alert.show();
     }
+    public void voltarMain() {
+        try {
+            Stage stage = (Stage) voltarButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+            Parent root = loader.load();
+            String perfil = UserSession.getPerfil();
+            UserSession.setPerfil(perfil);
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela principal.");
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,5 +142,5 @@ public class FXMLCadastroPedidoController implements Initializable {
     private Date convertToDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
-
+    
 }
