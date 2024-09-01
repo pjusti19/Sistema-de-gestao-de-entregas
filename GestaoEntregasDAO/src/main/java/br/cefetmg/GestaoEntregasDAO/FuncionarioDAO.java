@@ -19,7 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 public class FuncionarioDAO {
 
     public void inserirFuncionario(Funcionario funcionario) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
@@ -34,13 +34,13 @@ public class FuncionarioDAO {
     }
     
     public Funcionario findById(int id) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return entityManager.find(Funcionario.class, id);
     }
     
     public List<Funcionario> selecionarTodosFuncionarios() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaQuery<Funcionario> criteria = entityManager.getCriteriaBuilder().createQuery(Funcionario.class);
         criteria.select(criteria.from(Funcionario.class));
@@ -51,7 +51,7 @@ public class FuncionarioDAO {
     }
 
     public void excluirFuncionario(int idFuncionario) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
@@ -71,7 +71,7 @@ public class FuncionarioDAO {
     }
 
     public void atualizarFuncionario(Funcionario funcionario) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();

@@ -19,7 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 public class ClienteDAO {
 
     public void inserirCliente(Cliente cliente) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
@@ -34,13 +34,13 @@ public class ClienteDAO {
     }
     
     public Cliente findById(int id) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return entityManager.find(Cliente.class, id);
     }
     
     public List<Cliente> selecionarTodosClientes() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaQuery<Cliente> criteria = entityManager.getCriteriaBuilder().createQuery(Cliente.class);
         criteria.select(criteria.from(Cliente.class));
@@ -51,7 +51,7 @@ public class ClienteDAO {
     }
 
     public void excluirCliente(int idCliente) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
@@ -71,7 +71,7 @@ public class ClienteDAO {
     }
 
     public void atualizarCliente(Cliente cliente) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
