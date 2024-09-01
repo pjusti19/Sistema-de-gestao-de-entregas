@@ -59,10 +59,7 @@ public class FXMLCadastroEmpresaController {
         );
 
         VerificadorDeCampos verificador = new VerificadorDeCampos();
-        if (!verificador.estaCompleto(campos)) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Por favor, preencha todos os campos obrigatórios.");
-            alert.show();
+        if (verificador.estaCompleto(campos)) {
             return;
         }
 

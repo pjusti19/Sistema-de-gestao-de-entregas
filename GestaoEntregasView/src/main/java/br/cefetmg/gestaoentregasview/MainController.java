@@ -36,6 +36,11 @@ public class MainController {
             addButton("Cadastrar Funcionário", "loadFuncionarioScene");
             addButton("Cadastrar Cliente", "loadClienteScene");
             addButton("Cadastrar Empresa", "loadEmpresaScene");
+            addButton("Ver Pedidos", "verPedidos");
+            addButton("Ver Produtos", "verProdutos");
+            addButton("Ver Clientes", "verClientes");
+            addButton("Ver Empresas", "verEmpresas");
+            addButton("Ver Funcionários", "verFuncionarios");
         } else if ("Entregador".equals(perfil)) {
             addButton("Ver Pedidos", "verPedidos");
         }
@@ -70,7 +75,19 @@ public class MainController {
                     loadScene("FXMLCadastroEmpresa.fxml");
                     break;
                 case "verPedidos":
-                    // aqui entra a implementação da exibição de pedidos
+                    loadScene("FXMLExibirPedido.fxml");
+                    break;
+                case "verProdutos":
+                    loadScene("FXMLExibirProduto.fxml");
+                    break;
+                case "verClientes":
+                    loadScene("FXMLExibirCLiente.fxml");
+                    break;
+                case "verEmpresas":
+                    loadScene("FXMLExibirEmpresa.fxml");
+                    break;
+                case "verFuncionarios":
+                    loadScene("FXMLExibirFuncionario.fxml");
                     break;
                 default:
                     System.out.println("Ação desconhecida: " + action);

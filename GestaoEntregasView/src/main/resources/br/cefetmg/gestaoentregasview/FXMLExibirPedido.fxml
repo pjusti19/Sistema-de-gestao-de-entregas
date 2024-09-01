@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="br.cefetmg.gestaoentregasview.FXMLExibirPedidosController">
+    <children>
+        <VBox spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <TableView fx:id="tableViewPedidos">
+                    <columns>
+                        <TableColumn fx:id="colProduto" text="Produto" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="nomeProduto" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colQuantidade" text="Quantidade" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="quantidade" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colValorUnitario" text="Valor Unitário" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="valorUnitario" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colValorTotal" text="Valor Total" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="valorTotal" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colMarca" text="Marca" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="marca" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colFormaPagamento" text="Forma de Pagamento" prefWidth="150">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="formaPagamento" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="120">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="status" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colData" text="Data" prefWidth="120">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="data" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

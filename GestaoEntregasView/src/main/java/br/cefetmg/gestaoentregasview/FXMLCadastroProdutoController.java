@@ -37,10 +37,10 @@ public class FXMLCadastroProdutoController {
         );
 
         VerificadorDeCampos verificador = new VerificadorDeCampos();
-        if (!verificador.estaCompleto(campos)) {
-            showAlert(Alert.AlertType.ERROR, "Erro", "Preencha todos os campos obrigatórios.");
+        if (verificador.estaCompleto(campos)) {
             return;
         }
+
 
         Alert alert = new Alert(Alert.AlertType.NONE);
         try {

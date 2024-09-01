@@ -74,9 +74,9 @@ public class FXMLCadastroFuncionarioController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.NONE);
         try {
             FuncionarioController controller = new FuncionarioController();
-            controller.cadastrarFuncionario(nomeFuncionario, telefoneFuncionario, senhaFuncionario, ocupacaoFuncionario);
+            controller.cadastrarFuncionario(nomeFuncionario, senhaFuncionario, telefoneFuncionario, ocupacaoFuncionario);
             alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setContentText("Cliente cadastrado com sucesso!");
+            alert.setContentText("Funcionário cadastrado com sucesso!");
         } catch (Exception ex) {
             System.out.println(ex.toString());
             alert.setAlertType(Alert.AlertType.ERROR);

@@ -47,5 +47,6 @@
          </GridPane.margin>
       </Label>
       <ComboBox fx:id="comboBoxOcupacaoFuncionario" maxWidth="200.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+      <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain"/>
    </children>
 </GridPane>

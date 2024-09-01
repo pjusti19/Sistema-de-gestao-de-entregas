@@ -8,24 +8,41 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import br.cefetmg.GestaoEntregasEntidades.Funcionario;
+import javax.persistence.TypedQuery;
+import javax.persistence.NoResultException;
 
 public class LoginController {
 
     @FXML
     private PasswordField passwordField;
+    
+    private EntityManagerFactory emf;
+    private EntityManager em;
+
+    public LoginController() {
+        emf = Persistence.createEntityManagerFactory("br.cefetmg_GestaoEntregasDAO_jar_1.0-SNAPSHOTPU");
+        em = emf.createEntityManager();
+    }
 
     @FXML
     private void fazerLogin() {
         String password = passwordField.getText();
         
         try {
+            Funcionario funcionario = buscarFuncionarioPorPerfil("ENTREGADOR");
             if ("admin".equals(password)) {
                 UserSession.setPerfil("Administrador");
                 loadMainScene("Administrador");
-            } else if ("entregador".equals(password)) {
-                UserSession.setPerfil("Entregador");
-                loadMainScene("Entregador");
-            } else {
+            }
+            else if (funcionario != null && funcionario.getSenha().equals(password)) {
+                    UserSession.setPerfil("Entregador");
+                    loadMainScene("Entregador");
+                }
+            else {
                 showAlert(AlertType.ERROR, "Erro", "Senha inválida.");
             }
         } catch (Exception e) {
@@ -48,5 +65,20 @@ public class LoginController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private Funcionario buscarFuncionarioPorPerfil(String perfilString) {
+        try {
+            Funcionario.Perfil perfil = Funcionario.Perfil.valueOf(perfilString);
+
+            TypedQuery<Funcionario> query = em.createQuery(
+                    "SELECT f FROM Funcionario f WHERE f.perfil = :perfil", Funcionario.class);
+            query.setParameter("perfil", perfil);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (IllegalArgumentException e) {
+            showAlert(AlertType.ERROR, "Erro", "Perfil inválido.");
+            return null;
+        }
     }
 }

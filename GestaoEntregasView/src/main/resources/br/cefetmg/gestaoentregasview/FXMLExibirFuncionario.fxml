@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="br.cefetmg.gestaoentregasview.FXMLExibirFuncionariosController">
+    <children>
+        <VBox spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <TableView fx:id="tableViewFuncionarios">
+                    <columns>
+                        <TableColumn fx:id="colNome" text="Nome" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="nome" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colSenha" text="Senha" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="senha" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colTelefone" text="Telefone" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="telefone" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="colPerfil" text="Perfil" prefWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="perfil" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
