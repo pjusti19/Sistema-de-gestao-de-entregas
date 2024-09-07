@@ -79,7 +79,7 @@ public class ClienteDAO {
             if (clientePersistido != null) {
                 clientePersistido.setId(cliente.getId());
                 clientePersistido.setNome(cliente.getNome());
-                clientePersistido.setEndereço(cliente.getEndereço());
+                clientePersistido.setEndereco(cliente.getEndereco());
                 clientePersistido.setBairro(cliente.getBairro());
                 clientePersistido.setTelefone(cliente.getTelefone());
                 clientePersistido.setCpf(cliente.getCpf());
