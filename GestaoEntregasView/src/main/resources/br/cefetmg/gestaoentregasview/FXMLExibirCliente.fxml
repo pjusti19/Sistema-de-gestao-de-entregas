@@ -46,6 +46,8 @@
                     </columns>
                 </TableView>
                 <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain" />
+                <Button fx:id="deletarButton" text="Deletar Cliente" onAction="#deletarCliente" />
+                <Button fx:id="atualizarButton" text="Atualizar" onAction="#atualizarCliente" />
             </children>
         </VBox>
     </children>

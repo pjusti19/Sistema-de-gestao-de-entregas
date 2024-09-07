@@ -46,6 +46,12 @@ public class FXMLExibirClientesController implements Initializable {
     @FXML
     private Button voltarButton;
 
+    @FXML
+    private Button deletarButton;
+
+    @FXML
+    private Button atualizarButton;
+
     private ObservableList<Cliente> pedidosList;
 
     @Override
@@ -56,10 +62,12 @@ public class FXMLExibirClientesController implements Initializable {
         colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         colCnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
         colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
- 
+
+        carregarClientes();
+    }   
+    public void atualizarTabela() {
         carregarClientes();
     }
-
     private void carregarClientes() {
         try {
             ClienteController controller = new ClienteController();
@@ -68,6 +76,55 @@ public class FXMLExibirClientesController implements Initializable {
             tableViewClientes.setItems(observableClientes);
         } catch (Exception e) {
             showAlert("Erro ao carregar clientes", "Não foi possível carregar os clientes.", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void deletarCliente() {
+        Cliente clienteSelecionado = tableViewClientes.getSelectionModel().getSelectedItem();
+        if (clienteSelecionado != null) {
+            try {
+                ClienteController controller = new ClienteController();
+                controller.excluirCliente(clienteSelecionado.getId());
+                tableViewClientes.getItems().remove(clienteSelecionado);
+                showAlert(Alert.AlertType.INFORMATION, "Cliente excluído", "O cliente foi excluído com sucesso.");
+            } catch (Exception e) {
+                showAlert("Erro ao excluir cliente", "Não foi possível excluir o cliente.", e.getMessage());
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum cliente selecionado", "Por favor, selecione um cliente para excluir.");
+        }
+    }
+
+    @FXML
+    private void atualizarCliente() {
+        Cliente clienteSelecionado = tableViewClientes.getSelectionModel().getSelectedItem();
+        if (clienteSelecionado != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAtualizarCliente.fxml"));
+                Parent root = loader.load();
+
+                FXMLAtualizarClienteController atualizarController = loader.getController();
+                atualizarController.configurarCampos(
+                        clienteSelecionado.getNome(),
+                        clienteSelecionado.getEndereco(),
+                        clienteSelecionado.getBairro(),
+                        clienteSelecionado.getTelefone(),
+                        clienteSelecionado.getCnpj(),
+                        clienteSelecionado.getCpf(),
+                        clienteSelecionado.getId()
+                );
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnHidden(event -> atualizarTabela());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de atualização.");
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum cliente selecionado", "Por favor, selecione um cliente para atualizar.");
         }
     }
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="407.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.cefetmg.gestaoentregasview.FXMLAtualizarFuncionarioController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="166.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="241.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="107.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="138.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TextField fx:id="textFieldNomeFuncionario" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
+      <TextField fx:id="textFieldTelefoneFuncionario" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+      <TextField fx:id="textFieldSenhaFuncionario" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Label text="Nome:" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="5.0" right="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label prefHeight="17.0" prefWidth="52.0" text="Telefone:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Senha:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="10.0" top="5.0" />
+         </GridPane.margin>
+      </Label>
+      <Button mnemonicParsing="false" onAction="#atualizarFuncionario" text="Atualizar" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+      <Label text="Ocupação: " GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets right="10.0" top="5.0" />
+         </GridPane.margin>
+      </Label>
+      <ComboBox fx:id="comboBoxOcupacaoFuncionario" maxWidth="200.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+      <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain"/>
+   </children>
+</GridPane>

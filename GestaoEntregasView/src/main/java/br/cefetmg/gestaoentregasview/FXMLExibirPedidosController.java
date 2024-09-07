@@ -26,7 +26,7 @@ public class FXMLExibirPedidosController implements Initializable {
     private TableView<Pedido> tableViewPedidos;
 
     @FXML
-    private TableColumn<Pedido, String> colProduto;
+    private TableColumn<Pedido, String> colNome;
 
     @FXML
     private TableColumn<Pedido, Integer> colQuantidade;
@@ -51,12 +51,18 @@ public class FXMLExibirPedidosController implements Initializable {
 
     @FXML
     private Button voltarButton;
+    
+    @FXML
+    private Button deletarButton;
+    
+    @FXML
+    private Button atualizarButton;
 
     private ObservableList<Pedido> pedidosList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        colProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
         colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
         colValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
@@ -65,6 +71,10 @@ public class FXMLExibirPedidosController implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
+        carregarPedidos();
+    }
+    
+    public void atualizarTabela() {
         carregarPedidos();
     }
 
@@ -78,7 +88,58 @@ public class FXMLExibirPedidosController implements Initializable {
             showAlert("Erro ao carregar pedidos", "Não foi possível carregar os pedidos.", e.getMessage());
         }
     }
+    
+    @FXML
+    private void deletarPedido() {
+        Pedido pedidoSelecionado = tableViewPedidos.getSelectionModel().getSelectedItem();
+        if (pedidoSelecionado != null) {
+            try {
+                PedidoController controller = new PedidoController();
+                controller.excluirPedido(pedidoSelecionado.getId());
+                tableViewPedidos.getItems().remove(pedidoSelecionado);
+                showAlert(Alert.AlertType.INFORMATION, "Pedido excluído", "O pedido foi excluído com sucesso.");
+            } catch (Exception e) {
+                showAlert("Erro ao excluir pedido", "Não foi possível excluir o pedido.", e.getMessage());
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum pedido selecionado", "Por favor, selecione um pedido para excluir.");
+        }
+    }
+    
+    @FXML
+    private void atualizarPedido() {
+        Pedido pedidoSelecionado = tableViewPedidos.getSelectionModel().getSelectedItem();
+        if (pedidoSelecionado != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAtualizarPedido.fxml"));
+                Parent root = loader.load();
 
+                FXMLAtualizarPedidoController atualizarController = loader.getController();
+                atualizarController.configurarCampos(
+                        pedidoSelecionado.getNomeProduto(),
+                        pedidoSelecionado.getQuantidade(),
+                        pedidoSelecionado.getValorUnitario(),
+                        pedidoSelecionado.getValorTotal(),
+                        pedidoSelecionado.getMarca(),
+                        pedidoSelecionado.getFormaPagamento(),
+                        pedidoSelecionado.getStatus(),
+                        pedidoSelecionado.getData(),
+                        pedidoSelecionado.getId()
+                );
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnHidden(event -> atualizarTabela());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de atualização.");
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum pedido selecionado", "Por favor, selecione um pedido para atualizar.");
+        }
+    }
+    
     private void showAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

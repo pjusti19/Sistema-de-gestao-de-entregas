@@ -13,7 +13,7 @@
             <children>
                 <TableView fx:id="tableViewPedidos">
                     <columns>
-                        <TableColumn fx:id="colProduto" text="Produto" prefWidth="100">
+                        <TableColumn fx:id="colNome" text="Pedido" prefWidth="100">
                             <cellValueFactory>
                                 <PropertyValueFactory property="nomeProduto" />
                             </cellValueFactory>
@@ -56,6 +56,8 @@
                     </columns>
                 </TableView>
                 <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain" />
+                <Button fx:id="deletarButton" text="Deletar Pedido" onAction="#deletarPedido" />
+                <Button fx:id="atualizarButton" text="Atualizar Pedido" onAction="#atualizarPedido" />
             </children>
         </VBox>
     </children>

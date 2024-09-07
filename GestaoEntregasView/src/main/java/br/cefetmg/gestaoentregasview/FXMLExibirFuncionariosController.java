@@ -37,11 +37,20 @@ public class FXMLExibirFuncionariosController implements Initializable {
     @FXML
     private TableColumn<Funcionario, String> colPerfil;
 
-
     @FXML
     private Button voltarButton;
+    
+    @FXML
+    private Button deletarButton;
+    
+    @FXML
+    private Button atualizarButton;
 
     private ObservableList<Funcionario> pedidosList;
+    
+    public void atualizarTabela() {
+        carregarFuncionarios();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,6 +70,53 @@ public class FXMLExibirFuncionariosController implements Initializable {
             tableViewFuncionarios.setItems(observableFuncionarios);
         } catch (Exception e) {
             showAlert("Erro ao carregar pedidos", "Não foi possível carregar os pedidos.", e.getMessage());
+        }
+    }
+    
+    @FXML
+    private void deletarFuncionario() {
+        Funcionario funcionarioSelecionado = tableViewFuncionarios.getSelectionModel().getSelectedItem();
+        if (funcionarioSelecionado != null) {
+            try {
+                FuncionarioController controller = new FuncionarioController();
+                controller.excluirFuncionario(funcionarioSelecionado.getId());
+                tableViewFuncionarios.getItems().remove(funcionarioSelecionado);
+                showAlert(Alert.AlertType.INFORMATION, "Funcionario excluído", "O funcionario foi excluído com sucesso.");
+            } catch (Exception e) {
+                showAlert("Erro ao excluir funcionario", "Não foi possível excluir o funcionario.", e.getMessage());
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum funcionario selecionado", "Por favor, selecione um funcionario para excluir.");
+        }
+    }
+    
+    @FXML
+    private void atualizarFuncionario() {
+        Funcionario funcionarioSelecionado = tableViewFuncionarios.getSelectionModel().getSelectedItem();
+        if (funcionarioSelecionado != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAtualizarFuncionario.fxml"));
+                Parent root = loader.load();
+
+                FXMLAtualizarFuncionarioController atualizarController = loader.getController();
+                atualizarController.configurarCampos(
+                        funcionarioSelecionado.getNome(),
+                        funcionarioSelecionado.getTelefone(),
+                        funcionarioSelecionado.getSenha(),
+                        funcionarioSelecionado.getPerfil(),
+                        funcionarioSelecionado.getId()
+                );
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnHidden(event -> atualizarTabela());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de atualização.");
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum funcionario selecionado", "Por favor, selecione um funcionario para atualizar.");
         }
     }
 

@@ -39,7 +39,10 @@ public class FXMLExibirEmpresasController implements Initializable {
 
     @FXML
     private Button voltarButton;
-
+    
+    @FXML
+    private Button deletarButton;
+    
     private ObservableList<Empresa> pedidosList;
 
     @Override
@@ -62,7 +65,58 @@ public class FXMLExibirEmpresasController implements Initializable {
             showAlert("Erro ao carregar empresas", "Não foi possível carregar as empresas.", e.getMessage());
         }
     }
+    
+    public void atualizarTabela() {
+        carregarEmpresas();
+    }
+    
+    @FXML
+    private void deletarEmpresa() {
+        Empresa empresaSelecionada = tableViewEmpresas.getSelectionModel().getSelectedItem();
+        if (empresaSelecionada != null) {
+            try {
+                EmpresaController controller = new EmpresaController();
+                controller.excluirEmpresa(empresaSelecionada.getId());
+                tableViewEmpresas.getItems().remove(empresaSelecionada);
+                showAlert(Alert.AlertType.INFORMATION, "Empresa excluído", "A empresa foi excluído com sucesso.");
+            } catch (Exception e) {
+                showAlert("Erro ao excluir empresa", "Não foi possível excluir a empresa.", e.getMessage());
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhuma empresa selecionada", "Por favor, selecione uma empresa para excluir.");
+        }
+    }
+    
+    @FXML
+    private void atualizarEmpresa() {
+        Empresa empresaSelecionada = tableViewEmpresas.getSelectionModel().getSelectedItem();
+        if (empresaSelecionada != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAtualizarEmpresa.fxml"));
+                Parent root = loader.load();
 
+                FXMLAtualizarEmpresaController atualizarController = loader.getController();
+                atualizarController.configurarCampos(
+                        empresaSelecionada.getNome(),
+                        empresaSelecionada.getCnpj(),
+                        empresaSelecionada.getCpf(),
+                        empresaSelecionada.getPorcentagemComissaoEntregador(),
+                        empresaSelecionada.getId()
+                );
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnHidden(event -> atualizarTabela());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de atualização.");
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhuma empresa selecionado", "Por favor, selecione uma empresa para atualizar.");
+        }
+    }
+    
     private void showAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

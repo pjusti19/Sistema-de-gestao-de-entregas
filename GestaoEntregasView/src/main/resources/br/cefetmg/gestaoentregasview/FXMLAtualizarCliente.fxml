@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="342.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoentregasview.FXMLAtualizarClienteController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="95.0" prefWidth="95.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.0" minWidth="100.0" prefWidth="207.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="60.0" minHeight="20.0" prefHeight="60.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+  <children>
+    <Label text="Nome:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+      <GridPane.margin>
+        <Insets right="15.0" />
+      </GridPane.margin>
+    </Label>
+    <TextField fx:id="textFieldNome" maxWidth="200.0" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
+
+    <Label text="Endereço:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <GridPane.margin>
+        <Insets right="15.0" />
+      </GridPane.margin>
+    </Label>
+    <TextField fx:id="textFieldEndereco" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+
+    <Label text="Bairro:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <GridPane.margin>
+        <Insets right="15.0" />
+      </GridPane.margin>
+    </Label>
+    <TextField fx:id="textFieldBairro" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+
+    <Label text="Telefone:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+      <GridPane.margin>
+        <Insets right="15.0" />
+      </GridPane.margin>
+    </Label>
+    <TextField fx:id="textFieldTelefone" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+
+    <Label text="CNPJ:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <GridPane.margin>
+        <Insets right="15.0" />
+      </GridPane.margin>
+    </Label>
+    <TextField fx:id="textFieldCnpj" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+
+    <Label text="CPF:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+      <GridPane.margin>
+        <Insets right="15.0" />
+      </GridPane.margin>
+    </Label>
+    <TextField fx:id="textFieldCpf" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+
+    <Button mnemonicParsing="false" onAction="#atualizarCliente" text="Atualizar" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="TOP">
+      <GridPane.margin>
+        <Insets left="25.0" top="15.0" />
+      </GridPane.margin>
+    </Button>
+    <Button fx:id="voltarButton" text="Voltar" onAction="#voltarMain"/>
+  </children>
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+</GridPane>

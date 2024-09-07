@@ -31,16 +31,22 @@ public class FXMLExibirProdutosController implements Initializable {
     @FXML
     private TableColumn<Produto, String> colLocalizacao;
 
-
     @FXML
     private Button voltarButton;
-
-    private ObservableList<Produto> pedidosList;
+    
+    @FXML
+    private Button atualizarButton;
+    
+    private ObservableList<Produto> produtosList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colLocalizacao.setCellValueFactory(new PropertyValueFactory<>("localizacao"));
+        carregarProdutos();
+    }
+    
+    public void atualizarTabela() {
         carregarProdutos();
     }
 
@@ -54,7 +60,51 @@ public class FXMLExibirProdutosController implements Initializable {
             showAlert("Erro ao carregar produtos", "Não foi possível carregar os produtos.", e.getMessage());
         }
     }
+    
+    @FXML
+    private void deletarProduto() {
+        Produto produtoSelecionado = tableViewProdutos.getSelectionModel().getSelectedItem();
+        if (produtoSelecionado != null) {
+            try {
+                ProdutoController controller = new ProdutoController();
+                controller.excluirProduto(produtoSelecionado.getId()); 
+                tableViewProdutos.getItems().remove(produtoSelecionado);
+                showAlert(Alert.AlertType.INFORMATION, "Produto excluído", "O produto foi excluído com sucesso.");
+            } catch (Exception e) {
+                showAlert("Erro ao excluir produto", "Não foi possível excluir o produto.", e.getMessage());
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum produto selecionado", "Por favor, selecione um produto para excluir.");
+        }
+    }
+    
+    @FXML
+    private void atualizarProduto() {
+        Produto produtoSelecionado = tableViewProdutos.getSelectionModel().getSelectedItem();
+        if (produtoSelecionado != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLAtualizarProduto.fxml"));
+                Parent root = loader.load();
 
+                FXMLAtualizarProdutoController atualizarController = loader.getController();
+                atualizarController.configurarCampos(
+                        produtoSelecionado.getNome(),
+                        produtoSelecionado.getLocalizacao(),
+                        produtoSelecionado.getId()
+                );
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+                stage.setOnHidden(event -> atualizarTabela());
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a tela de atualização.");
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Nenhum produto selecionado", "Por favor, selecione um produto para atualizar.");
+        }
+    }
     private void showAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

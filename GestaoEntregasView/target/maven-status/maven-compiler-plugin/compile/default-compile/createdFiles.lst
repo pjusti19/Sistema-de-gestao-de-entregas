@@ -1,8 +1,13 @@
 br\cefetmg\gestaoentregasview\FXMLExibirProdutosController.class
 br\cefetmg\gestaoentregasview\FXMLExibirFuncionariosController.class
+br\cefetmg\gestaoentregasview\FXMLAtualizarPedidoController.class
 br\cefetmg\gestaoentregasview\FXMLCadastroClienteController.class
+br\cefetmg\gestaoentregasview\FXMLAtualizarClienteController.class
 br\cefetmg\gestaoentregasview\FXMLExibirClientesController.class
+br\cefetmg\gestaoentregasview\FXMLAtualizarFuncionarioController.class
 br\cefetmg\gestaoentregasview\FXMLCadastroEmpresaController.class
+br\cefetmg\gestaoentregasview\FXMLAtualizarEmpresaController.class
+br\cefetmg\gestaoentregasview\FXMLAtualizarProdutoController.class
 br\cefetmg\gestaoentregasview\FXMLCadastroPedidoController.class
 br\cefetmg\gestaoentregasview\UserSession.class
 br\cefetmg\gestaoentregasview\LoginController.class
