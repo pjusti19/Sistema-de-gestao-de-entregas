@@ -25,8 +25,19 @@ public class EmpresaController {
         return empresaDAO.findById(id);
     }
 
-    public void atualizarEmpresa(Empresa empresa) {
-        empresaDAO.atualizarEmpresa(empresa);
+    public void atualizarEmpresa(int id, String nome, String cnpj, String cpf, double PorcentagemComissaoEntregador) {
+        Empresa empresa = empresaDAO.findById(id);
+
+        if (empresa != null) {
+            empresa.setNome(nome);
+            empresa.setCnpj(cnpj);
+            empresa.setCpf(cpf);
+            empresa.setPorcentagemComissaoEntregador(PorcentagemComissaoEntregador);
+
+            empresaDAO.atualizarEmpresa(empresa);
+        } else {
+            throw new RuntimeException("Empresa com ID " + id + " não encontrado.");
+        }
     }
 
     public void excluirEmpresa(int id) {

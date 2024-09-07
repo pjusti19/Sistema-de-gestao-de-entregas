@@ -26,8 +26,19 @@ public class FuncionarioController {
         return funcionarioDAO.findById(id);
     }
 
-    public void atualizarFuncionario(Funcionario funcionario) {
-        funcionarioDAO.atualizarFuncionario(funcionario);
+    public void atualizarFuncionario(int id, String nome, String senha, String telefone, Funcionario.Perfil perfil) {
+        Funcionario funcionario = funcionarioDAO.findById(id);
+
+        if (funcionario != null) {
+            funcionario.setNome(nome);
+            funcionario.setSenha(senha);
+            funcionario.setTelefone(telefone);
+            funcionario.setPerfil(perfil);
+
+            funcionarioDAO.atualizarFuncionario(funcionario);
+        } else {
+            throw new RuntimeException("Funcionario com ID " + id + " não encontrado.");
+        }
     }
 
     public void excluirFuncionario(int id) {

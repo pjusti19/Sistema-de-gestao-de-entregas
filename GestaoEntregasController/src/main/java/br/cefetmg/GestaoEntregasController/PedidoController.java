@@ -13,7 +13,7 @@ public class PedidoController {
         this.pedidoDAO = new PedidoDAO();
     }
 
-     public void cadastrarPedido(String nome_produto, int quantidade, double valorUnitario, double valorTotal, String marca, String formaPagamento, Pedido.Status status, Date data) {
+    public void cadastrarPedido(String nome_produto, int quantidade, double valorUnitario, double valorTotal, String marca, String formaPagamento, Pedido.Status status, Date data) {
         Pedido pedido = new Pedido();
         pedido.setNomeProduto(nome_produto);
         pedido.setQuantidade(quantidade);
@@ -31,10 +31,24 @@ public class PedidoController {
         return pedidoDAO.findById(id);
     }
 
-    public void atualizarPedido(Pedido pedido) {
-        pedidoDAO.atualizarPedido(pedido);
-    }
+    public void atualizarPedido(int id, String nomeProduto, int quantidade, double valorUnitario, double valorTotal, String marca, String formaPagamento, Pedido.Status status, Date data) {
+        Pedido pedido = pedidoDAO.findById(id);
 
+        if (pedido != null) {
+            pedido.setNomeProduto(nomeProduto);
+            pedido.setQuantidade(quantidade);
+            pedido.setValorUnitario(valorUnitario);
+            pedido.setValorTotal(valorTotal);
+            pedido.setMarca(marca);
+            pedido.setFormaPagamento(formaPagamento);
+            pedido.setStatus(status);
+            pedido.setData(data);
+
+            pedidoDAO.atualizarPedido(pedido);
+        } else {
+            throw new RuntimeException("Pedido com ID " + id + " não encontrado.");
+        }
+    }
     public void excluirPedido(int id) {
         pedidoDAO.excluirPedido(id);
     }

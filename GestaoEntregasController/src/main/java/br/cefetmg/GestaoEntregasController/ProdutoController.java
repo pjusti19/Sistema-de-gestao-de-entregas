@@ -23,8 +23,18 @@ public class ProdutoController {
         return produtoDAO.findById(id);
     }
 
-    public void atualizarProduto(Produto produto) {
-        produtoDAO.atualizarProduto(produto);
+    public void atualizarProduto(int id, String nome, String localizacao) {
+        Produto produto = produtoDAO.findById(id);
+
+        if (produto != null) {
+            produto.setNome(nome);
+            produto.setLocalizacao(localizacao);
+
+
+            produtoDAO.atualizarProduto(produto);
+        } else {
+            throw new RuntimeException("Produto com ID " + id + " não encontrado.");
+        }
     }
 
     public void excluirProduto(int id) {

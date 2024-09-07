@@ -5,16 +5,17 @@ import br.cefetmg.GestaoEntregasEntidades.Cliente;
 import java.util.List;
 
 public class ClienteController {
+
     private ClienteDAO clienteDAO;
 
     public ClienteController() {
         this.clienteDAO = new ClienteDAO();
     }
 
-    public void cadastrarCliente(String nome, String endereço, String bairro, String telefone, String cnpj, String cpf) {
+    public void cadastrarCliente(String nome, String endereco, String bairro, String telefone, String cnpj, String cpf) {
         Cliente cliente = new Cliente();
         cliente.setNome(nome);
-        cliente.setEndereço(endereço);
+        cliente.setEndereco(endereco);
         cliente.setBairro(bairro);
         cliente.setTelefone(telefone);
         cliente.setCnpj(cnpj);
@@ -27,8 +28,21 @@ public class ClienteController {
         return clienteDAO.findById(id);
     }
 
-    public void atualizarCliente(Cliente cliente) {
-        clienteDAO.atualizarCliente(cliente);
+    public void atualizarCliente(int id, String nome, String endereco, String bairro, String telefone, String cnpj, String cpf) {
+        Cliente cliente = clienteDAO.findById(id);
+
+        if (cliente != null) {
+            cliente.setNome(nome);
+            cliente.setEndereco(endereco);
+            cliente.setBairro(bairro);
+            cliente.setTelefone(telefone);
+            cliente.setCnpj(cnpj);
+            cliente.setCpf(cpf);
+
+            clienteDAO.atualizarCliente(cliente);
+        } else {
+            throw new RuntimeException("Cliente com ID " + id + " não encontrado.");
+        }
     }
 
     public void excluirCliente(int id) {
